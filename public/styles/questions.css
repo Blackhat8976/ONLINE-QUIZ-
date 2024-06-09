@@ -1,5 +1,10 @@
 /* styles/question-upload.css */
 
+@font-face {
+    font-family: "valorax" ;
+    src: url('./assets/Valorax-lg25V.otf');
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -19,7 +24,7 @@ h1 {
     text-shadow: 0 0 10px black,
         0 0 10px black,
         0 0 10px black;
-    font-family: "Lobster", sans-serif;
+    font-family: "valorax";
     margin-bottom: 20px;
 }
 
