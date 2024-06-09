@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/playerroom.css">
+    <title>Player</title>
+
+</head>
+
+<body>
+    <div class="room-box">
+                 
+<h1>HELLO PLAYER</h1>
+
+            <form action="/joinRoom" id="joinForm" method="GET">
+                <input type="text" name="roomids" id="room" placeholder="Enter the Room id" required><br><br><br>
+                <button type="submit">Join</button>
+            </form>
+        </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        document.getElementById('joinForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const roomid = document.getElementById('room').value;
+            if (roomid) {
+                socket.emit('joinRooms', roomid);
+                console.log(`Requested to join room: ${roomid}`);
+                window.location.href = "/joinRoom"
+            } else {
+                console.log('Room ID is required.');
+            }
+        });
+
+        socket.on('error', function (message) {
+            alert(message); // Show error message to the user
+        });
+    </script>
+</body>
+</div>
+
+</html>

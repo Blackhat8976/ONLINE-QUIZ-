@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room create</title>
+    <link rel="stylesheet" href="styles/room.css">
+</head>
+
+<body>
+    <h1>Room creation page</h1>
+
+   <form action="/join" method="get">
+    <input type="number" placeholder="room id" name="roomid" id="room" required>
+    <button id="btn">Create</button>
+
+   </form>
+
+   <script src="/socket.io/socket.io.js"></script>
+   <script>
+       const socket = io();
+       function JoinRoom(){
+        const roomid = document.getElementById("room").value;
+        socket.emit('createroom', roomid);
+        sessionStorage.setItem('roomId', roomid);
+       }        
+       
+       document.getElementById('btn').addEventListener("click", JoinRoom);
+
+
+       
+        
+   </script>
+
+
+</body>
+
+</html>

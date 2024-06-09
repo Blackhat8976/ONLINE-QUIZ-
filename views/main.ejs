@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="styles/player.css">
+    
+</head>
+<body>
+    <form action="/submit-quiz" method="post">
+        <% questions.forEach((question, index) => { %>
+            <div class="questions">
+                <h1> <%= index+1 %>) <%= question.questions %></h1>
+                <input type="radio" name="answer<%= index %>" value="<%= question.option1 %>"required> <%= question.option1 %><br>
+                <input type="radio" name="answer<%= index %>" value="<%= question.option2 %>"required> <%= question.option2 %><br>
+                <input type="radio" name="answer<%= index %>" value="<%= question.option3 %>"required> <%= question.option3 %><br>
+                <input type="radio" name="answer<%= index %>" value="<%= question.option4 %>"required> <%= question.option4 %><br>
+            </div>
+        <% }) %>
+        <button type="submit">Submit Quiz</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.emit('playerConnect', "a player connected" )
+    </script>
+</body>
+
+</html>
