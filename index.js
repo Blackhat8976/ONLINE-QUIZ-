@@ -85,6 +85,7 @@ const checkfunc = (username, password, res, role) => {
     });
 
 }
+// ஃ 
 
 // ----------------Routes------------------- \\
 
@@ -96,7 +97,10 @@ app.get("/", (req, res) => {
             return;
         }
         const rows = JSON.stringify(result.rows);
-        res.render("index.ejs", { rowss: rows });
+        res.render("index.ejs", { rowss: rows }); ஃ
+        const status = req.session.status;
+        delete req.session.status; // Clear status after reading it
+        res.render("index", { status: status });
     });
 
 })
@@ -114,7 +118,8 @@ app.post("/submit", (req, res) => {
     const { username, password, role, email } = req.body;
     postfunc(username, email, role, password, res);
     setTimeout(() => {
-        res.redirect("/");
+        req.session.status = status;
+        res.redirect("/", { status: status });
     }, 3000)
 });
 
