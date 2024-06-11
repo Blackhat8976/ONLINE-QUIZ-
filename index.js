@@ -56,6 +56,7 @@ const postfunc = (username, email, role, password, res) => {
 
 let hostname;
 let playername;
+var loginStatus = false;
 
 const checkfunc = (username, password, res, role) => {
     db.query(`SELECT * FROM ${role} WHERE username = $1 AND password = $2`, [username, password], (err, result) => {
@@ -65,16 +66,18 @@ const checkfunc = (username, password, res, role) => {
                 if (role == "host") {
                     res.render("index2.ejs");
                     hostname = result.rows[0].username
+                    loginStatus = true
 
                 } else {
                     res.redirect("/player");
                     playername = result.rows[0].username
+                    loginStatus = true
 
                 }
 
             } else {
                 console.log("Not a member!! Register!!");
-                res.send("Not a member!! Register!!");
+                loginStatus = false;
             }
         } else {
             console.error("Error checking user:", err);
